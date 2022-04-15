@@ -1,0 +1,14 @@
+import openpyxl
+
+
+def main():
+    pop = open_worksheet()
+
+
+
+def open_worksheet():
+    Wb = openpyxl.load.workbook("countyPopChange2020-2021")
+    worksheet = Wb.active
+    for i in worksheet.iter_rows(min_row=1, max_col=worksheet.max)
+        data = row[i].value
+    return data
