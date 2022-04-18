@@ -12,3 +12,12 @@ def open_worksheet():
     for i in worksheet.iter_rows(min_row=1, max_col=worksheet.max)
         data = row[i].value
     return data
+    
+def should_display_pop_change():
+    UserInput=input("should the map display total population changes")
+    if UserInput=="yes":
+         return True
+    elif UserInput=="no"
+         returnfalse
+         
+         
