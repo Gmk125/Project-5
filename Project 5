@@ -3,21 +3,35 @@ import openpyxl
 
 def main():
     pop = open_worksheet()
+    show_pop_change=should_display_pop_change()
 
 
 
 def open_worksheet():
     Wb = openpyxl.load.workbook("countyPopChange2020-2021")
     worksheet = Wb.active
-    for i in worksheet.iter_rows(min_row=1, max_col=worksheet.max)
-        data = row[i].value
+    for i in range(0,worksheet.max_row):
+        for col in worksheet.iter.cols(1,worksheet.max_column):
+            data=col[i].value
     return data
-    
+
+
 def should_display_pop_change():
-    UserInput=input("should the map display total population changes")
-    if UserInput=="yes":
-         return True
-    elif UserInput=="no"
-         returnfalse
+    user_input= input("Do you want to display a map of total population change")
+    if user_input=="yes":
+        return True
+    elif user_input=="no":
+         return False
+
+def show_pop_change_map():
+    wb=openpyxl.load_workbook('countyPopChange2020-2021.xslx')
+    worksheet=wb.active
+    for row in  worksheet.iter.rows_rows(1,worksheet.max_row):
+        if row[4].value==0:
+            print(row[5].value)
+            print(row[11].value
+            print()
+
+main()
          
          
