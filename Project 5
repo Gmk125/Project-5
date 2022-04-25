@@ -24,13 +24,29 @@ def should_display_pop_change():
          return False
 
 def show_pop_change_map():
+    location_array= []
+    population_array= []
     wb=openpyxl.load_workbook('countyPopChange2020-2021.xslx')
     worksheet=wb.active
     for row in  worksheet.iter.rows_rows(1,worksheet.max_row):
         if row[4].value==0:
             print(row[5].value)
-            print(row[11].value
+            print(row[11].value)
             print()
+            location_array.append(row[5].value)
+            population_array.append(row[11].value)
+
+    map_fig=plotly.graph_objects.Figure(
+        data=plotly.graph_objects.Choropleth(
+             locations=location_array,
+             z=population_array,
+             locationmode='USA-states',
+             colorscale='Reds',
+        ))
+
+    map_fig.show()
+
+
 
 main()
          
