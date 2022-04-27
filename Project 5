@@ -1,10 +1,11 @@
-import openpyxl
+mport openpyxl
 
 
 def main():
     pop = open_worksheet()
     show_pop_change=should_display_pop_change()
-
+    show_pop_change_map()
+    show_percent_change_map()
 
 
 def open_worksheet():
@@ -42,12 +43,40 @@ def show_pop_change_map():
              z=population_array,
              locationmode='USA-states',
              colorscale='Reds',
+
+
         ))
 
     map_fig.show()
 
+def show_percent_change_map():
+    location_array= []
+    percent_change_array= []
+    wb=openpyxl.load_workbook('countyPopChange2020-2021.xslx')
+    worksheet=wb.active
+    for row in  worksheet.iter.rows_rows(1,worksheet.max_row):
+        if row[4].value==0:
+            print(row[5].value)
+            print(row[9].value)
+            print(row[11].value)
+            percent_change =(row[11].value/row[9].value) * 100
+            print(percent_change)
+            print()
+            location_array.append(row[5].value)
+            percent_change_array_array.append(percent_change)
 
+    map_fig = plotly.graph_objects.Figure(
+        data=plotly.graph_objects.Choropleth(
+            locations=location_array,
+            z=percent_change_array,
+            locationmode='USA-states',
+            colorscale='Reds',
+
+        ))
+
+    map_fig.show()
 
 main()
+
          
          
