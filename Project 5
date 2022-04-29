@@ -1,9 +1,14 @@
-mport openpyxl
+import openpyxl
+import numbers
+import plotly.graph._objects
+from state_abbrev import us_state_to_abbrev
+import openpyxl.utils
+
 
 
 def main():
     pop = open_worksheet()
-    show_pop_change=should_display_pop_change()
+    show_pop_change = should_display_pop_change()
     show_pop_change_map()
     show_percent_change_map()
 
@@ -11,55 +16,56 @@ def main():
 def open_worksheet():
     Wb = openpyxl.load.workbook("countyPopChange2020-2021")
     worksheet = Wb.active
-    for i in range(0,worksheet.max_row):
-        for col in worksheet.iter.cols(1,worksheet.max_column):
-            data=col[i].value
+    for i in range(0, worksheet.max_row):
+        for col in worksheet.iter.cols(1, worksheet.max_column):
+            data = col[i].value
     return data
 
 
 def should_display_pop_change():
-    user_input= input("Do you want to display a map of total population change")
-    if user_input=="yes":
+    user_input = input("Do you want to display a map of total population change")
+    if user_input == "yes":
         return True
-    elif user_input=="no":
-         return False
+    elif user_input == "no":
+        return False
+
 
 def show_pop_change_map():
-    location_array= []
-    population_array= []
-    wb=openpyxl.load_workbook('countyPopChange2020-2021.xslx')
-    worksheet=wb.active
-    for row in  worksheet.iter.rows_rows(1,worksheet.max_row):
-        if row[4].value==0:
+    location_array = []
+    population_array = []
+    wb = openpyxl.load_workbook('countyPopChange2020-2021.xslx')
+    worksheet = wb.active
+    for row in worksheet.iter.rows_rows(1, worksheet.max_row):
+        if row[4].value == 0:
             print(row[5].value)
             print(row[11].value)
             print()
             location_array.append(row[5].value)
             population_array.append(row[11].value)
 
-    map_fig=plotly.graph_objects.Figure(
+    map_fig = plotly.graph_objects.Figure(
         data=plotly.graph_objects.Choropleth(
-             locations=location_array,
-             z=population_array,
-             locationmode='USA-states',
-             colorscale='Reds',
-
+            locations=location_array,
+            z=population_array,
+            locationmode='USA-states',
+            colorscale='Reds',
 
         ))
 
     map_fig.show()
 
+
 def show_percent_change_map():
-    location_array= []
-    percent_change_array= []
-    wb=openpyxl.load_workbook('countyPopChange2020-2021.xslx')
-    worksheet=wb.active
-    for row in  worksheet.iter.rows_rows(1,worksheet.max_row):
-        if row[4].value==0:
+    location_array = []
+    percent_change_array = []
+    wb = openpyxl.load_workbook('countyPopChange2020-2021.xslx')
+    worksheet = wb.active
+    for row in worksheet.iter.rows_rows(1, worksheet.max_row):
+        if row[4].value == 0:
             print(row[5].value)
             print(row[9].value)
             print(row[11].value)
-            percent_change =(row[11].value/row[9].value) * 100
+            percent_change = (row[11].value / row[9].value) * 100
             print(percent_change)
             print()
             location_array.append(row[5].value)
@@ -72,11 +78,14 @@ def show_percent_change_map():
             locationmode='USA-states',
             colorscale='Reds',
 
-        ))
+        )
+        )
+    map_to_show.update_layout(
+        title_text= "Income Change 2015 to 2020"
+        geo_scope="usa"
+    )
+    
 
     map_fig.show()
 
-main()
-
-         
          
