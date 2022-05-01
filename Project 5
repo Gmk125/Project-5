@@ -48,7 +48,7 @@ def show_pop_change_map():
             locations=location_array,
             z=population_array,
             locationmode='USA-states',
-            colorscale='Reds',
+            colorscale='Reds'
 
         ))
 
@@ -76,7 +76,7 @@ def show_percent_change_map():
             locations=location_array,
             z=percent_change_array,
             locationmode='USA-states',
-            colorscale='Reds',
+            colorscale='Reds'
 
         )
         )
