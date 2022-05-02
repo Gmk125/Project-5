@@ -5,14 +5,14 @@ from state_abbrev import us_state_to_abbrev
 import openpyxl.utils
 
 
-Main Function
+1.Main Function
 def main():
     pop = open_worksheet()
     show_pop_change = should_display_pop_change()
     show_pop_change_map()
     show_percent_change_map()
 
-Open_worsheet function
+2.Open_worsheet function
 def open_worksheet():
     Wb = openpyxl.load.workbook("countyPopChange2020-2021")
     worksheet = Wb.active
@@ -31,7 +31,7 @@ def should_display_pop_change():
         return False
 
 
-should_display_pop_change map
+3.should_display_pop_change map
 
 def show_pop_change_map():
     location_array = []
@@ -59,7 +59,7 @@ def show_pop_change_map():
 
 show_percent_change_map
 
-def show_percent_change_map():
+4.def show_percent_change_map():
     location_array = []
     percent_change_array = []
     wb = openpyxl.load_workbook('countyPopChange2020-2021.xslx')
