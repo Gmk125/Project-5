@@ -57,9 +57,9 @@ should_display_pop_change map
 
     map_fig.show()
 
-show_percent_change_map
+5.show_percent_change_map
 
-5.def show_percent_change_map():
+def show_percent_change_map():
     location_array = []
     percent_change_array = []
     wb = openpyxl.load_workbook('countyPopChange2020-2021.xslx')
